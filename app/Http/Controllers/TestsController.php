@@ -10,7 +10,8 @@ class TestsController extends Controller
     public function one() {
         $results = DB::table('products')
             ->where('id', '4')
-            ->get();
+            ->value('name');
+            // ->get();
         echo '<pre>';
         dd($results);
         echo '</pre>';
