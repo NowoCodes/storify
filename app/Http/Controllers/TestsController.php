@@ -9,7 +9,7 @@ class TestsController extends Controller
 {
     public function one() {
         $results = DB::table('products')
-            ->orderBy('name', 'DESC')
+            ->where('id', '4')
             ->get();
         echo '<pre>';
         dd($results);
