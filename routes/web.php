@@ -17,7 +17,3 @@ use App\Http\Controllers\TestsController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/test1', [TestsController::class, 'one']);
-Route::get('/test2', [TestsController::class, 'two']);
-
