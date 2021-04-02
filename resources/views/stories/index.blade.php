@@ -8,7 +8,31 @@
           <div class="card-header">Stories</div>
 
           <div class="card-body">
-            Story
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($stories as $story)
+                        <tr>
+                            <td>{{ $story->title }}</td>
+                            <td>{{ $story->type }}</td>
+                            <td>{{ $story->status == 1 ? 'Yes' : 'No' }}</td>
+                            {{-- <td>{{ $story-> }}</td> --}}
+                            <td></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center">
+                {{ $stories->links() }}
+            </div>
           </div>
         </div>
       </div>
