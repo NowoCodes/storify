@@ -23,5 +23,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+use App\Http\Controllers\StoriesController;
 Route::get('/stories', [StoriesController::class, 'index'])
     ->middleware('auth');
