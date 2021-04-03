@@ -30,7 +30,7 @@
                 </tbody>
             </table>
 
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-end">
                 {{ $stories->links() }}
             </div>
           </div>
