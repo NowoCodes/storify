@@ -15,4 +15,10 @@ class StoriesController extends Controller
             'stories' => $stories,
         ]);
     }
+
+    public function show(Story $story) {
+        // $story = Story::findOrFail($id);
+
+        dd($story);
+    }
 }
