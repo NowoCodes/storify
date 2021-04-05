@@ -25,6 +25,9 @@ Route::get('/dashboard', function () {
 require __DIR__ . '/auth.php';
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/stories', [StoriesController::class, 'index']);
-    Route::get('/stories/{story}', [StoriesController::class, 'show'])->name('stories.show');
+    Route::get('/stories', [StoriesController::class, 'index'])
+        ->name('stories.index');
+        
+    Route::get('/stories/{story}', [StoriesController::class, 'show'])
+        ->name('stories.show');
 });
