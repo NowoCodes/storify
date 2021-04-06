@@ -40,20 +40,14 @@ class StoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'body' => 'required|string|email|max:255|unique:users',
-            'type' => 'required|string|confirmed|min:8',
-            'status' => 'required|string|confirmed|min:8',
+        $data = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'type' => 'required',
+            'status' => 'required',
         ]);
 
-        auth()->user()->stories()->create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'type' => $request->type,
-            'status' => $request->status,
-            // 'user_id' => auth()->user()->id,
-        ]);
+        auth()->user()->stories()->create($data);
         return redirect()->route('stories.index')
             ->with('status', 'Story Created Successfully');
     }
