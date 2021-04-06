@@ -40,6 +40,13 @@ class StoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'body' => 'required|string|email|max:255|unique:users',
+            'type' => 'required|string|confirmed|min:8',
+            'status' => 'required|string|confirmed|min:8',
+        ]);
+
         auth()->user()->stories()->create([
             'title' => $request->title,
             'body' => $request->body,
