@@ -30,6 +30,14 @@
                       <a href="{{ route('stories.show', [$story]) }}" class="btn btn-sm btn-secondary">View</a>
 
                       <a href="{{ route('stories.edit', [$story]) }}" class="btn btn-sm btn-secondary">Edit</a>
+
+                      <form action="{{ route('stories.destroy', [$story]) }}" method="POST" class="d-inline-flex">
+                        @csrf
+                        @method('DELETE')
+
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                      {{-- <a href="{{ route('stories.destroy', [$story]) }}" class="btn btn-sm btn-danger">Delete</a> --}}
                     </td>
                   </tr>
                 @endforeach
