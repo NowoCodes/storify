@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Gate;
 
 class StoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Story::class, 'story');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,8 +36,7 @@ class StoriesController extends Controller
      */
     public function create()
     {
-        $this->authorize('update', $story);
-
+        // $this->authorize('create');
         $story = new Story;
         return view('stories.create', [
             'story' => $story,
@@ -60,7 +64,7 @@ class StoriesController extends Controller
      */
     public function show(Story $story)
     {
-        $this->authorize('view', $story);
+        // $this->authorize('view', $story);
         return view('stories.show', [
             'story' => $story,
         ]);
@@ -76,7 +80,7 @@ class StoriesController extends Controller
     {
         // ? Prevent other users from editing another user's story
         // Gate::authorize('edit-story', $story);
-        $this->authorize('update', $story);
+        // $this->authorize('update', $story);
         // ?
         return view('stories.edit', [
             'story' => $story,
@@ -105,7 +109,7 @@ class StoriesController extends Controller
      */
     public function destroy(Story $story)
     {
-        $this->authorize('delete', $story);
+        // $this->authorize('delete', $story);
         $story->delete();
         return redirect()->route('stories.index')
             ->with('status', 'Story Deleted Successfully');
