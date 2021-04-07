@@ -22,8 +22,8 @@
 
 <body class="font-sans antialiased">
   <!-- Page Content -->
+  @include('layouts.navigation')
   <main class="container pt-5">
-    @include('layouts.navigation')
 
     @if (session('status'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
