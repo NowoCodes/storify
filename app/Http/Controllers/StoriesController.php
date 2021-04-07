@@ -45,7 +45,7 @@ class StoriesController extends Controller
      */
     public function store(StoryRequest $request)
     {
-        auth()->user()->stories()->create($request->all());
+        auth()->user()->stories()->create($request->validated());
         return redirect()->route('stories.index')
             ->with('status', 'Story Created Successfully');
     }
@@ -85,7 +85,7 @@ class StoriesController extends Controller
      */
     public function update(StoryRequest $request, Story $story)
     {
-        $story->update($request->all());
+        $story->update($request->validated());
         return redirect()->route('stories.index')
             ->with('status', 'Story Updated Successfully');
     }

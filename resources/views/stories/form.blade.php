@@ -13,7 +13,7 @@
   <label for="body" class="form-label">Body:</label>
   <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="3"">{{ old('body', $story->body) }}</textarea>
   @error('body')
-    <span class=" invalid-feedback" role="alert">
+    <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
     </span>
   @enderror
