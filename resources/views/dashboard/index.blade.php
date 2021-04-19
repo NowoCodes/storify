@@ -29,7 +29,10 @@
               <tbody>
                 @foreach ($stories as $story)
                   <tr>
-                    <td>{{ $story->title }}</td>
+                    <td>
+                        <a href="{{ route('dashboard.show', [$story]) }}">
+                            {{ $story->title }}</td>
+                        </a>
                     <td>{{ $story->type }}</td>
                     <td>{{ $story->user->name }}</td>
                   </tr>
@@ -38,7 +41,7 @@
             </table>
 
             <div class="d-flex justify-content-end">
-              {{ $stories->links() }}
+              {{ $stories->withQueryString()->links() }}
             </div>
           </div>
         </div>
