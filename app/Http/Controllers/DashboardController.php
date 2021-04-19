@@ -23,4 +23,11 @@ class DashboardController extends Controller
             'stories' => $stories,
         ]);
     }
+
+    public function show(Story $activeStory)
+    {
+        return view('dashboard.show', [
+            'story' => $activeStory,
+        ]);
+    }
 }
