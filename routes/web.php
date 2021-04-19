@@ -19,6 +19,8 @@ use App\Http\Controllers\StoriesController;
 // });
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DashboardController;
+
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
 Route::get('/dashboard', function () {
@@ -30,3 +32,6 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth'])->group(function () {
     Route::resource('stories', StoriesController::class);
 });
+
+Route::get('/', [DashboardController::class, 'index'])
+    ->name('dashboard.index');
