@@ -36,5 +36,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [DashboardController::class, 'index'])
     ->name('dashboard.index');
 
-Route::get('/story/{activeStory}', [DashboardController::class, 'show'])
+Route::get('/story/{activeStory:slug}', [DashboardController::class, 'show'])
 ->name('dashboard.show');
