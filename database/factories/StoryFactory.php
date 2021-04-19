@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Story;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class StoryFactory extends Factory
 {
