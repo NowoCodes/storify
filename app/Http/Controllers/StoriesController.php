@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\StoryCreated;
+use App\Events\StoryEdited;
 use App\Models\Story;
 use App\Http\Requests\StoryRequest;
 use Illuminate\Support\Facades\Mail;
@@ -101,6 +102,8 @@ class StoriesController extends Controller
     public function update(StoryRequest $request, Story $story)
     {
         $story->update($request->validated());
+        event(new StoryEdited($story->title));
+
         return redirect()->route('stories.index')
             ->with('status', 'Story Updated Successfully');
     }
