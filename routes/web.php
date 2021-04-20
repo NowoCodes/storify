@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoriesController;
+use App\Http\Controllers\Admin\AdminStoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/', [AuthenticatedSessionController::class, 'create']);
+// Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -41,3 +42,13 @@ Route::get('/story/{activeStory:slug}', [DashboardController::class, 'show'])
 
 Route::get('/email', [DashboardController::class, 'email'])
 ->name('dashboard.email');
+
+// Route::namespace('Admin')->prefix('admin')->group(function() {
+//     Route::get('/deleted_stories', [StoriesController::class, 'index'])
+//         ->name('admin.stories.index');
+// }); Not working. It's not using the stories in the Admin folder
+
+Route::namespace('Admin')->prefix('admin')->group(function() {
+    Route::get('/deleted_stories', [AdminStoriesController::class, 'index'])
+        ->name('admin.stories.index');
+});
