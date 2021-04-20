@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\StoryCreated;
+use App\Listeners\SendNotification;
+use App\Listeners\StoryEventSubscriber;
+use App\Listeners\WriteLog;
+
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -19,10 +24,14 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         // Add event & listener files
-        'App\Events\StoryCreated' => [
-            'App\Listeners\WriteLog',
-            'App\Listeners\SendNotification',
+        StoryCreated::class => [
+            // WriteLog::class,
+            SendNotification::class,
         ],
+    ];
+
+    protected $subscribe = [
+        StoryEventSubscriber::class,
     ];
 
     /**
