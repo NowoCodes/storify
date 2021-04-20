@@ -19,10 +19,8 @@ use App\Http\Controllers\Admin\AdminStoriesController;
 //     return view('welcome');
 // });
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
-
-// Route::get('/', [AuthenticatedSessionController::class, 'create']);
+use App\Http\Middleware\CheckAdmin;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -38,17 +36,23 @@ Route::get('/', [DashboardController::class, 'index'])
     ->name('dashboard.index');
 
 Route::get('/story/{activeStory:slug}', [DashboardController::class, 'show'])
-->name('dashboard.show');
+    ->name('dashboard.show');
 
 Route::get('/email', [DashboardController::class, 'email'])
-->name('dashboard.email');
+    ->name('dashboard.email');
 
 // Route::namespace('Admin')->prefix('admin')->group(function() {
 //     Route::get('/deleted_stories', [StoriesController::class, 'index'])
 //         ->name('admin.stories.index');
 // }); Not working. It's not using the stories in the Admin folder
 
-Route::namespace('Admin')->prefix('admin')->group(function() {
+Route::namespace('Admin')->prefix('admin')->middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/deleted_stories', [AdminStoriesController::class, 'index'])
         ->name('admin.stories.index');
+
+    Route::put('/stories/restore/{id}', [AdminStoriesController::class, 'restore'])
+        ->name('admin.stories.restore');
+
+    Route::delete('/stories/delete/{id}', [AdminStoriesController::class, 'delete'])
+        ->name('admin.stories.delete');
 });

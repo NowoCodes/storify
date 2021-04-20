@@ -40,7 +40,6 @@
 
                         <button class="btn btn-sm btn-danger">Delete</button>
                         </form>
-                      {{-- <a href="{{ route('stories.destroy', [$story]) }}" class="btn btn-sm btn-danger">Delete</a> --}}
                     </td>
                   </tr>
                 @endforeach
