@@ -21,10 +21,7 @@ use App\Http\Controllers\Admin\AdminStoriesController;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\CheckAdmin;
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+use Intervention\Image\ImageManagerStatic as Image;
 
 require __DIR__ . '/auth.php';
 
@@ -55,4 +52,14 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', CheckAdmin::clas
 
     Route::delete('/stories/delete/{id}', [AdminStoriesController::class, 'delete'])
         ->name('admin.stories.delete');
+});
+
+Route::get('/image', function () {
+    $imagePath = public_path('storage/14550.jpg');
+    $writePath = public_path('storage/thumbnail.jpg');
+
+    $img = Image::make($imagePath)->resize(225, 100);
+    $img->save($writePath);
+
+    return $img->response('jpg');
 });
