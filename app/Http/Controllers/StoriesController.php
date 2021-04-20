@@ -6,9 +6,7 @@ use App\Events\StoryCreated;
 use App\Events\StoryEdited;
 use App\Models\Story;
 use App\Http\Requests\StoryRequest;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\NewStoryNotification;
-use Illuminate\Support\Facades\Log;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class StoriesController extends Controller
 {
@@ -55,6 +53,10 @@ class StoriesController extends Controller
     public function store(StoryRequest $request)
     {
         $story = auth()->user()->stories()->create($request->validated());
+        if ($request->hasFile('image')) {
+            $this->_uploadImage($request, $story);
+        }
+
         event(new StoryCreated($story->title));
 
         return redirect()->route('stories.index')
@@ -102,6 +104,10 @@ class StoriesController extends Controller
     public function update(StoryRequest $request, Story $story)
     {
         $story->update($request->validated());
+        if ($request->hasFile('image')) {
+            $this->_uploadImage($request, $story);
+        }
+
         event(new StoryEdited($story->title));
 
         return redirect()->route('stories.index')
@@ -120,5 +126,15 @@ class StoriesController extends Controller
         $story->delete();
         return redirect()->route('stories.index')
             ->with('status', 'Story Deleted Successfully');
+    }
+
+    private function _uploadImage($request, $story)
+    {
+        $image = $request->file('image');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        Image::make($image)->resize(225, 100)
+            ->save(public_path('storage/' . $filename));
+        $story->image = $filename;
+        $story->save();
     }
 }
