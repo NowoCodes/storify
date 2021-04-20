@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugToStories extends Migration
+class AddTypeToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddSlugToStories extends Migration
      */
     public function up()
     {
-        Schema::table('stories', function (Blueprint $table) {
-            $table->string('slug');
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('type')->default(2);
+
         });
     }
 
@@ -25,8 +26,8 @@ class AddSlugToStories extends Migration
      */
     public function down()
     {
-        Schema::table('stories', function (Blueprint $table) {
-            $table->dropColumn('slug');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('type');
         });
     }
 }
