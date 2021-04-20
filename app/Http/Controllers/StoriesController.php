@@ -8,6 +8,7 @@ use App\Http\Requests\StoryRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewStoryNotification;
+use Illuminate\Support\Facades\Log;
 
 class StoriesController extends Controller
 {
@@ -55,6 +56,7 @@ class StoriesController extends Controller
     {
         $story = auth()->user()->stories()->create($request->validated());
         Mail::send(new NewStoryNotification($story->title));
+        Log::info("A story with title " . $story->title . " was added");
 
         return redirect()->route('stories.index')
             ->with('status', 'Story Created Successfully');
