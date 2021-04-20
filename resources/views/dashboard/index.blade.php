@@ -21,6 +21,7 @@
             <table class="table table-sm">
               <thead>
                 <tr>
+                  <th>Image</th>
                   <th>Title</th>
                   <th>Type</th>
                   <th>Author</th>
@@ -29,6 +30,7 @@
               <tbody>
                 @foreach ($stories as $story)
                   <tr>
+                      <td><img src="{{ $story->thumbnail }}" alt="Story Image"></td>
                     <td>
                         <a href="{{ route('dashboard.show', [$story]) }}">
                             {{ $story->title }}</td>
