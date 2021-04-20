@@ -1,3 +1,3 @@
-<h1>A  New Story was added</h1>
+<h1>A  New Story was added.</h1>
 
-<p>Please Check the homepage</p>
+<p>A story with title {{ $title }} was added.</p>

@@ -10,15 +10,15 @@ use Illuminate\Queue\SerializesModels;
 class NotifyAdmin extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $title;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title)
     {
-        //
+        $this->title = $title;
     }
 
     /**
@@ -28,6 +28,7 @@ class NotifyAdmin extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.notifyAdmin');
+        return $this->view('emails.notifyAdmin')
+            ->to('admin@localhost.com');
     }
 }

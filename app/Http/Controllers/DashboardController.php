@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Story;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifyAdmin;
 
 class DashboardController extends Controller
 {
@@ -29,5 +31,23 @@ class DashboardController extends Controller
         return view('dashboard.show', [
             'story' => $activeStory,
         ]);
+    }
+
+    public function email()
+    {
+        // Mail::raw('This is the Test Email', function ($message) {
+        //     // $message->from('john@johndoe.com', 'John Doe');
+        //     // $message->sender('john@johndoe.com', 'John Doe');
+        //     // $message->to('john@johndoe.com', 'John Doe');
+        //     // $message->cc('john@johndoe.com', 'John Doe');
+        //     // $message->bcc('john@johndoe.com', 'John Doe');
+        //     // $message->replyTo('john@johndoe.com', 'John Doe');
+        //     $message->subject('Subject');
+        //     // $message->priority(3);
+        //     // $message->attach('pathToFile');
+        // });
+        Mail::send(new NotifyAdmin('Title of the story'));
+
+        dd('here');
     }
 }
