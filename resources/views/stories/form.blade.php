@@ -13,9 +13,9 @@
   <label for="body" class="form-label">Body:</label>
   <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="3"">{{ old('body', $story->body) }}</textarea>
   @error('body')
-    <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
+      <span class=" invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
   @enderror
 </div>
 
@@ -23,13 +23,13 @@
   <label for="type" class="form-label">Type:</label>
   <select class="form-control @error('type') is-invalid @enderror" name="type" id="type">
     <option value="">-- Select --</option>
-    <option value="short" {{ 'short' == old('type', $story->type ) ? 'selected' : '' }}>Short</option>
+    <option value="short" {{ 'short' == old('type', $story->type) ? 'selected' : '' }}>Short</option>
     <option value="long" {{ 'long' == old('type', $story->type) ? 'selected' : '' }}>Long</option>
   </select>
   @error('type')
-    <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
   @enderror
 </div>
 
@@ -48,8 +48,19 @@
     </label>
   </div>
   @error('status')
-    <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
   @enderror
+</div>
+
+<div class="mb-3">
+    <label for="image" class="form-label">Image:</label>
+    <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image">
+    @error('image')
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    <img class="mt-2" src="{{ $story->thumbnail }}" alt="Story Image">
 </div>
