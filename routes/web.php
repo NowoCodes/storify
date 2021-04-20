@@ -38,3 +38,6 @@ Route::get('/', [DashboardController::class, 'index'])
 
 Route::get('/story/{activeStory:slug}', [DashboardController::class, 'show'])
 ->name('dashboard.show');
+
+Route::get('/email', [DashboardController::class, 'email'])
+->name('dashboard.email');
