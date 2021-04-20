@@ -6,6 +6,7 @@ use App\Models\Story;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyAdmin;
+use App\Mail\NewStoryNotification;
 
 class DashboardController extends Controller
 {
@@ -46,7 +47,8 @@ class DashboardController extends Controller
         //     // $message->priority(3);
         //     // $message->attach('pathToFile');
         // });
-        Mail::send(new NotifyAdmin('Title of the story'));
+        // Mail::send(new NotifyAdmin('Title of the story'));
+        Mail::send(new NewStoryNotification('Title of the Story!!!'));
 
         dd('here');
     }

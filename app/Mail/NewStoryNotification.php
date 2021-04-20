@@ -11,14 +11,15 @@ class NewStoryNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $title;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title)
     {
-        //
+        $this->title = $title;
     }
 
     /**
@@ -28,6 +29,7 @@ class NewStoryNotification extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.newStoryNotification');
+        return $this->markdown('emails.newStoryNotification')
+            ->to('admin@localhost.com');
     }
 }

@@ -1,9 +1,9 @@
 @component('mail::message')
 # Introduction
 
-The body of your message.
+A New Story was added with {{ $title }}
 
-@component('mail::button', ['url' => ''])
+@component('mail::button', ['url' => route('dashboard.index')])
 Button Text
 @endcomponent
 
