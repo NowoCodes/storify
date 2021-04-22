@@ -12,9 +12,18 @@
           </div>
 
           <div class="card-body">
-            {{ $story->body }}
+              <img src="{{ $story->thumbnail }}" alt="Story Image" class="bd-placeholder-img card-img-top" width="100%" height="225">
+            {{-- {{ $story->body }}
 
-            <p class="fst-italic fw-bold">{{ $story->footnote }}</p>
+            <p class="fst-italic fw-bold">{{ $story->footnote }}</p> --}}
+            <p class="card-text">{{ $story->body }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">{{ $story->user->name }}</button>
+              </div>
+              <small class="text-muted">{{ $story->type }}</small>
+            </div>
+
           </div>
         </div>
       </div>
