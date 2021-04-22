@@ -64,3 +64,12 @@
     @enderror
     <img class="mt-2" src="{{ $story->thumbnail }}" alt="Story Image">
 </div>
+
+<div class="mb-3">
+    @foreach ($tags as $tag)
+        <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" name="tags[]" value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', $story->tags->pluck('id')->toArray())) ? 'checked' : '' }}>
+            <label class="form-check-label" for="">{{ $tag->name }}</label>
+        </div>
+    @endforeach
+</div>
