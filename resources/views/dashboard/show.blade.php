@@ -12,11 +12,14 @@
           </div>
 
           <div class="card-body">
-              <img src="{{ $story->thumbnail }}" alt="Story Image" class="bd-placeholder-img card-img-top" width="100%" height="225">
-            {{-- {{ $story->body }}
+            <img src="{{ $story->thumbnail }}" alt="Story Image" class="bd-placeholder-img card-img-top" width="100%"
+              height="225">
 
-            <p class="fst-italic fw-bold">{{ $story->footnote }}</p> --}}
+            {{-- <p class="fst-italic fw-bold">{{ $story->footnote }}</p> --}}
             <p class="card-text">{{ $story->body }}</p>
+            @foreach ($story->tags as $tag)
+              <span class="badge rounded-pill bg-primary card-text mb-2">{{ $tag->name }}</span>
+            @endforeach
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <button type="button" class="btn btn-sm btn-outline-secondary">{{ $story->user->name }}</button>

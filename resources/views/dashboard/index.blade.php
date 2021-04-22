@@ -29,6 +29,10 @@
 
               <div class="card-body">
                 <p class="card-text">{{ $story->title }}</p>
+
+                @foreach ($story->tags as $tag)
+                    <span class="badge rounded-pill bg-primary card-text mb-2">{{ $tag->name }}</span>
+                @endforeach
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">{{ $story->user->name}}</button>
