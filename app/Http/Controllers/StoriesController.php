@@ -6,6 +6,7 @@ use App\Events\StoryCreated;
 use App\Events\StoryEdited;
 use App\Models\Story;
 use App\Http\Requests\StoryRequest;
+use App\Models\Tag;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class StoriesController extends Controller
@@ -23,6 +24,7 @@ class StoriesController extends Controller
     public function index()
     {
         $stories = Story::where('user_id', auth()->user()->id)
+            ->with('tags')
             ->orderBy('id', 'DESC')
             ->Paginate(5);
         return view('stories.index', [
@@ -39,8 +41,11 @@ class StoriesController extends Controller
     {
         // $this->authorize('create');
         $story = new Story;
+        $tags = Tag::get();
+
         return view('stories.create', [
             'story' => $story,
+            'tags' => $tags,
         ]);
     }
 
@@ -56,6 +61,7 @@ class StoriesController extends Controller
         if ($request->hasFile('image')) {
             $this->_uploadImage($request, $story);
         }
+        $story->tags()->sync($request->tags);
 
         event(new StoryCreated($story->title));
 
@@ -89,8 +95,10 @@ class StoriesController extends Controller
         // Gate::authorize('edit-story', $story);
         // $this->authorize('update', $story);
         // ?
+        $tags = Tag::get();
         return view('stories.edit', [
             'story' => $story,
+            'tags' => $tags,
         ]);
     }
 
@@ -107,6 +115,7 @@ class StoriesController extends Controller
         if ($request->hasFile('image')) {
             $this->_uploadImage($request, $story);
         }
+        $story->tags()->sync($request->tags);
 
         event(new StoryEdited($story->title));
 

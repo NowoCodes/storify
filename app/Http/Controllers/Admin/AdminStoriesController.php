@@ -11,7 +11,7 @@ class AdminStoriesController extends Controller
     public function index()
     {
         $stories = Story::onlyTrashed()
-            ->with('user')
+            ->with('user', 'tags')
             ->orderBy('id', 'DESC')
             ->Paginate(10);
         return view('admin.stories.index', [
