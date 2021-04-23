@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\AdminStoriesController;
 // });
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfilesController;
 use App\Http\Middleware\CheckAdmin;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -27,6 +28,8 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('stories', StoriesController::class);
+    Route::get('/edit-profile', [ProfilesController::class, 'edit'])->name('profiles.edit');
+    Route::put('/edit-profile/{user}', [ProfilesController::class, 'update'])->name('profiles.update');
 });
 
 Route::get('/', [DashboardController::class, 'index'])
