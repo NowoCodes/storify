@@ -52,7 +52,7 @@ class GenerateStats extends Command
         }
 
         $sortBy = $this->options('sort');
-        if (in_array($sortBy, ['id', 'name', 'email', 'stories_count']) {
+        if (in_array($sortBy, ['id', 'name', 'email', 'stories_count'])) {
             $sortBy = 'id';
         }
 
