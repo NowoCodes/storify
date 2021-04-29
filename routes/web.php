@@ -46,15 +46,18 @@ Route::get('/email', [DashboardController::class, 'email'])
 //         ->name('admin.stories.index');
 // }); Not working. It's not using the stories in the Admin folder
 
-Route::namespace('Admin')->prefix('admin')->middleware(['auth', CheckAdmin::class])->group(function () {
+Route::namespace('Admin')->name('admin.stories.')->prefix('admin')->middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/deleted_stories', [AdminStoriesController::class, 'index'])
-        ->name('admin.stories.index');
+        ->name('index');
 
     Route::put('/stories/restore/{id}', [AdminStoriesController::class, 'restore'])
-        ->name('admin.stories.restore');
+        ->name('restore');
 
     Route::delete('/stories/delete/{id}', [AdminStoriesController::class, 'delete'])
-        ->name('admin.stories.delete');
+        ->name('delete');
+
+    Route::get('/stories/stats', [AdminStoriesController::class, 'stats'])
+        ->name('stats');
 });
 
 Route::get('/image', function () {

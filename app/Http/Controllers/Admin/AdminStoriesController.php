@@ -32,4 +32,13 @@ class AdminStoriesController extends Controller
         return redirect()->route('admin.stories.index')
             ->with('status', 'Story Deleted Successfully');
     }
+
+    public function stats() {
+        $stories = Story::active()->whereCreatedThisMonth()->with('user')
+            ->orderBy('id', 'DESC')->paginate(10);
+
+        return view('admin.stories.stats', [
+            'stories' => $stories,
+        ]);
+    }
 }
