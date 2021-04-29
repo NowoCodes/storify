@@ -2,21 +2,14 @@
   <label for="title" class="form-label">Title:</label>
   <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
     value="{{ old('title', $story->title) }}">
-  @error('title')
-    <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
-  @enderror
+  <x-form-error field="title" />
 </div>
 
 <div class="mb-3">
   <label for="body" class="form-label">Body:</label>
   <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="3"">{{ old('body', $story->body) }}</textarea>
-  @error('body')
-      <span class=" invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-  @enderror
+  <x-form-error field="body" />
+
 </div>
 
 <div class="mb-3">
@@ -26,11 +19,7 @@
     <option value="short" {{ 'short' == old('type', $story->type) ? 'selected' : '' }}>Short</option>
     <option value="long" {{ 'long' == old('type', $story->type) ? 'selected' : '' }}>Long</option>
   </select>
-  @error('type')
-      <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-  @enderror
+  <x-form-error field="type" />
 </div>
 
 <div class="mb-3">
@@ -47,22 +36,15 @@
       value="0" {{ '0' == old('status', $story->status) ? 'checked' : '' }}>No
     </label>
   </div>
-  @error('status')
-      <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-  @enderror
+  <x-form-error field="status" />
 </div>
 
 <div class="mb-3">
     <label for="image" class="form-label">Image:</label>
     <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image">
-    @error('image')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-    <img class="mt-2" src="{{ $story->thumbnail }}" alt="Story Image">
+    <x-form-error field="image" />
+
+  <img class="mt-2" src="{{ $story->thumbnail }}" alt="Story Image">
 </div>
 
 <div class="mb-3">
