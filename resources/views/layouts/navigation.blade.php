@@ -121,14 +121,20 @@
 
       @if (Auth::user()->type == 1)
         <div class="pt-2 pb-3 space-y-1">
-          <x-responsive-nav-link :href="route('profiles.edit')" :active="request()->routeIs('profiles.edit')">
+          <x-responsive-nav-link :href="route('admin.stories.index')" :active="request()->routeIs('admin.stories.index')">
             {{ __('Deleted Stories') }}
+          </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+          <x-responsive-nav-link :href="route('admin.stories.stats')" :active="request()->routeIs('admin.stories.stats')">
+              {{ __('Stats') }}
           </x-responsive-nav-link>
         </div>
       @endif
 
       <div class="pt-2 pb-3 space-y-1">
-        <x-responsive-nav-link :href="route('stories.index')" :active="request()->routeIs('stories.index')">
+        <x-responsive-nav-link :href="route('profiles.edit')" :active="request()->routeIs('profiles.edit')">
           {{ __('Edit Profile') }}
         </x-responsive-nav-link>
       </div>
